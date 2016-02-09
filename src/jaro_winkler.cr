@@ -1,6 +1,6 @@
 require "bit_array"
 
-class JaroWinkler
+struct JaroWinkler
   VERSION = "0.1"
 
   DEFAULT_ADJ_TABLE = [
@@ -70,7 +70,7 @@ class JaroWinkler
       right = len2 - 1 if right > len2 - 1
       j = left
       while j <= right
-        if flags2[j] == false && codes1[i] == codes2[j]
+        if !flags2[j] && codes1[i] == codes2[j]
           flags1[i] = true
           flags2[j] = true
           match_count += 1
@@ -106,10 +106,10 @@ class JaroWinkler
     if @adj_table && len1 > match_count
       i = 0
       while i < len1
-        if flags1[i] == false
+        unless flags1[i]
           j = 0
           while j < len2
-            if flags2[j] == false
+            unless flags2[j]
               if DEFAULT_ADJ_TABLE[codes1[i]]?.try &.[]?(codes2[j])
                 similar_count += 3
                 break
