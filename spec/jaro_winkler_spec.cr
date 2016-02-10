@@ -102,4 +102,7 @@ describe JaroWinkler do
     assert_distance_adj 0.0,    "FVIE",     "TEN"
   end
 
+  it "work with array of chars" do
+    assert_distance 0.9667, "henka".chars,       "henkan".chars
+  end
 end

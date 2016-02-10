@@ -26,8 +26,16 @@ struct JaroWinkler
     _distance(s1.chars, s2.chars)
   end
 
+  def distance(s1 : Array(Char), s2 : Array(Char))
+    _distance(s1, s2)
+  end
+
   def jaro_distance(s1 : String, s2 : String)
     _jaro_distance(s1.chars, s2.chars)
+  end
+
+  def jaro_distance(s1 : Array(Char), s2 : Array(Char))
+    _jaro_distance(s1, s2)
   end
 
   private def _distance(codes1, codes2)
