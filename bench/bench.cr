@@ -2,7 +2,7 @@
 
 require "../src/jaro_winkler"
 
-ary = [{"al", "al"}, {"martha", "marhta"}, {"jones", "johnson"}, 
+ary = [{"al", "al"}, {"martha", "marhta"}, {"jones", "johnson"},
   {"abcvwxyz", "cabvwxyz"}, {"dwayne", "duane"}, {"dixon", "dicksonx"}, {"fvie", "ten"}]
 
 jaro = JaroWinkler.new
@@ -23,4 +23,4 @@ ary.each do |elem|
   test(jaro, str1, str2, 1000000)
 end
 
-p Time.now - t 
+p Time.now - t

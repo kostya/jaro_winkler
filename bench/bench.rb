@@ -2,7 +2,7 @@
 
 require 'jaro_winkler'
 
-ary = [['al', 'al'], ['martha', 'marhta'], ['jones', 'johnson'], 
+ary = [['al', 'al'], ['martha', 'marhta'], ['jones', 'johnson'],
   ['abcvwxyz', 'cabvwxyz'], ['dwayne', 'duane'], ['dixon', 'dicksonx'], ['fvie', 'ten']]
 
 def test(str1, str2, n = 100000)
@@ -21,4 +21,4 @@ ary.each do |elem|
   test(str1, str2, 1000000)
 end
 
-p Time.now - t 
+p Time.now - t
