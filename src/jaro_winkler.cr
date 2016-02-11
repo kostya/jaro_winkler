@@ -71,62 +71,53 @@ struct JaroWinkler
 
     # count number of matching characters
     match_count = 0
-    i = 0
-    while i < len1
+    (0...len1).each do |i|
       left = (i >= window) ? i - window : 0
       right = (i + window <= len2 - 1) ? (i + window) : (len2 - 1)
       right = len2 - 1 if right > len2 - 1
-      j = left
-      while j <= right
-        if !flags2[j] && codes1[i] == codes2[j]
+      (left..right).each do |j|
+        next if flags2[j]
+
+        if codes1[i] == codes2[j]
           flags1[i] = true
           flags2[j] = true
           match_count += 1
           break
         end
-        j += 1
       end
-      i += 1
     end
 
     return 0.0 if match_count == 0
 
     # count number of transpositions
-    transposition_count = j = k = 0
-    i = 0
-    while i < len1
-      if flags1[i]
-        j = k
-        while j < len2
-          if flags2[j]
-            k = j + 1
-            break
-          end
-          j += 1
+    transposition_count = k = 0
+
+    (0...len1).each do |i|
+      next unless flags1[i]
+
+      j = (k...len2).each do |j|
+        if flags2[j]
+          k = j + 1
+          break j
         end
-        transposition_count += 1 if codes1[i] != codes2[j]
       end
-      i += 1
+
+      transposition_count += 1 if codes1[i] != codes2[j]
     end
 
     # count similarities in nonmatched characters
     similar_count = 0
     if @adj_table && len1 > match_count
-      i = 0
-      while i < len1
-        unless flags1[i]
-          j = 0
-          while j < len2
-            unless flags2[j]
-              if DEFAULT_ADJ_TABLE[codes1[i]]?.try &.[]?(codes2[j])
-                similar_count += 3
-                break
-              end
-            end
-            j += 1
+      (0...len1).each do |i|
+        next if flags1[i]
+        (0...len2).each do |j|
+          next if flags2[j]
+
+          if DEFAULT_ADJ_TABLE[codes1[i]]?.try &.[]?(codes2[j])
+            similar_count += 3
+            break
           end
         end
-        i += 1
       end
     end
 
