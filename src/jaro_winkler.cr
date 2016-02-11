@@ -8,7 +8,7 @@ struct JaroWinkler
     ['I', 'U'], ['O', 'U'], ['I', 'Y'], ['E', 'Y'], ['C', 'G'], ['E', 'F'], ['W', 'U'], ['W', 'V'], ['X', 'K'],
     ['S', 'Z'], ['X', 'S'], ['Q', 'C'], ['U', 'V'], ['M', 'N'], ['L', 'I'], ['Q', 'O'], ['P', 'R'], ['I', 'J'],
     ['2', 'Z'], ['5', 'S'], ['8', 'B'], ['1', 'I'], ['1', 'L'], ['0', 'O'], ['0', 'Q'], ['C', 'K'], ['G', 'J'],
-    ['E', ' '], ['Y', ' '], ['S', ' ']
+    ['E', ' '], ['Y', ' '], ['S', ' '],
   ].reduce(Hash(Char, Hash(Char, Bool)).new) do |hash, elem|
     c1, c2 = elem
     hash[c1] ||= Hash(Char, Bool).new
@@ -84,7 +84,7 @@ struct JaroWinkler
           match_count += 1
           break
         end
-        j +=1
+        j += 1
       end
       i += 1
     end
