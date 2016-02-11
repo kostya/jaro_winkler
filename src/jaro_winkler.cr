@@ -19,7 +19,7 @@ struct JaroWinkler
   end
 
   def initialize(@weight = 0.1, @threshold = 0.7, @ignore_case = false, @adj_table = false)
-    raise ArgumentError.new("weight should be > 0.25") if @weight > 0.25
+    raise ArgumentError.new("weight should be <= 0.25") if @weight > 0.25
   end
 
   def distance(s1 : String, s2 : String)
