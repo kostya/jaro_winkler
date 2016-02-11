@@ -1,4 +1,5 @@
 require "bit_array"
+require "set"
 
 struct JaroWinkler
   VERSION = "0.1"
@@ -9,13 +10,17 @@ struct JaroWinkler
     ['S', 'Z'], ['X', 'S'], ['Q', 'C'], ['U', 'V'], ['M', 'N'], ['L', 'I'], ['Q', 'O'], ['P', 'R'], ['I', 'J'],
     ['2', 'Z'], ['5', 'S'], ['8', 'B'], ['1', 'I'], ['1', 'L'], ['0', 'O'], ['0', 'Q'], ['C', 'K'], ['G', 'J'],
     ['E', ' '], ['Y', ' '], ['S', ' '],
-  ].reduce(Hash(Char, Hash(Char, Bool)).new) do |hash, elem|
+  ].reduce(Set(Tuple(Char, Char)).new) do |set, elem|
     c1, c2 = elem
-    hash[c1] ||= Hash(Char, Bool).new
-    hash[c2] ||= Hash(Char, Bool).new
-    hash[c1][c2] = true
-    hash[c2][c1] = true
-    hash
+    set << {c1, c2}
+    set << {c2, c1}
+    set << {c1.downcase, c2.downcase}
+    set << {c2.downcase, c1.downcase}
+    set << {c1.downcase, c2}
+    set << {c2, c1.downcase}
+    set << {c1, c2.downcase}
+    set << {c2.downcase, c1}
+    set
   end
 
   def initialize(@weight = 0.1, @threshold = 0.7, @ignore_case = false, @adj_table = false)
@@ -113,7 +118,7 @@ struct JaroWinkler
         (0...len2).each do |j|
           next if flags2[j]
 
-          if DEFAULT_ADJ_TABLE[codes1[i]]?.try &.[]?(codes2[j])
+          if DEFAULT_ADJ_TABLE.includes?({codes1[i], codes2[j]})
             similar_count += 3
             break
           end
