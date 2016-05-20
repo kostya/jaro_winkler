@@ -30,3 +30,10 @@ p JaroWinkler.new(adj_table: true).distance "month15", "m0nth1S"
 # => 0.854286
 
 ```
+
+## Benchmark
+
+```
+Ruby+C: 2.44s
+Crystal: 2.95s
+```
