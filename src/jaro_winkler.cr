@@ -100,14 +100,16 @@ struct JaroWinkler
     (0...len1).each do |i|
       next unless flags1[i]
 
-      j = (k...len2).each do |j|
+      jj = 0
+      (k...len2).each do |j|
         if flags2[j]
           k = j + 1
-          break j
+          jj = j
+          break
         end
       end
 
-      transposition_count += 1 if codes1[i] != codes2[j]
+      transposition_count += 1 if codes1[i] != codes2[jj]
     end
 
     # count similarities in nonmatched characters
