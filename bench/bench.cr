@@ -3,7 +3,7 @@
 require "../src/jaro_winkler"
 
 ary = [{"al", "al"}, {"martha", "marhta"}, {"jones", "johnson"},
-  {"abcvwxyz", "cabvwxyz"}, {"dwayne", "duane"}, {"dixon", "dicksonx"}, {"fvie", "ten"}]
+       {"abcvwxyz", "cabvwxyz"}, {"dwayne", "duane"}, {"dixon", "dicksonx"}, {"fvie", "ten"}]
 
 jaro = JaroWinkler.new
 
