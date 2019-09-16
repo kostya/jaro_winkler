@@ -70,7 +70,7 @@ struct JaroWinkler
       codes2.map! { |c| c = c.ord; c >= 97 && c <= 122 ? (c - 32).chr : c.chr }
     end
 
-    window = len2 / 2 - 1
+    window = len2 // 2 - 1
     window = 0 if window < 0
     flags1, flags2 = BitArray.new(len1), BitArray.new(len2)
 
@@ -129,7 +129,7 @@ struct JaroWinkler
     end
 
     m = match_count.to_f
-    t = transposition_count / 2
+    t = transposition_count // 2
     m = similar_count / 10.0 + m if @adj_table
     (m / len1 + m / len2 + (m - t) / m) / 3
   end
