@@ -2,7 +2,7 @@ require "bit_array"
 require "set"
 
 struct JaroWinkler
-  VERSION = "0.1"
+  VERSION = "0.2"
 
   DEFAULT_ADJ_TABLE = [
     ['A', 'E'], ['A', 'I'], ['A', 'O'], ['A', 'U'], ['B', 'V'], ['E', 'I'], ['E', 'O'], ['E', 'U'], ['I', 'O'],
